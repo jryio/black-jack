@@ -12,11 +12,11 @@ public class Player {
 	private String playerName;
 	private double playerBet;
 	private Hand hand;
+	private boolean gameEnd = false;
 
 	NumberFormat formatter = NumberFormat.getCurrencyInstance();
 	Scanner intInput = new Scanner(System.in);
 	Scanner stringInput = new Scanner(System.in);
-	Random generate = new Random();
 
 	public Player(Hand h, String name, double cash) {
 		this.playerName = name;
@@ -27,18 +27,20 @@ public class Player {
 
 	public void hit(Card c) {
 		hand.addCard(c);
-		System.out.println("Dealer dealt: " + c.toString());
-		if (hand.getHandValue() > 21) {
-			if ((hand.getHandRanks().contains("Ace"))) {
-
-				hand.getHand().get(hand.getHandRanks().indexOf("Ace")).setAce();
-
-			} else {
-				playerBust();
-			}
-		}
-	}
 		
+		System.out.println("Dealer dealt: " + c.toString());
+		if (hand.getHandValue() > 21 && (hand.getHandRanks().contains("Ace"))) {
+
+			hand.getHand().get(hand.getHandRanks().indexOf("Ace")).setAce();
+			hand.setAceValue();
+			System.out.println(this.toString());
+
+		} else if (hand.getHandValue() > 21
+				&& !(hand.getHandRanks().contains("Ace"))) {
+			playerBust();
+		}
+		
+	}
 
 	public void clearHand() {
 		hand.clearHand();
@@ -56,8 +58,8 @@ public class Player {
 
 	public void playerBust() {
 		System.out.println("You busted.");
-		this.hand.clearHand();
 		playerBet = 0;
+		gameEnd = true;
 
 	}
 
@@ -65,6 +67,14 @@ public class Player {
 		System.out.println("You lost");
 		this.hand.clearHand();
 		playerBet = 0;
+		gameEnd = true;
+	}
+
+	public void playerPush() {
+		playerBank += playerBet;
+		playerBet = 0;
+		playerBankString = formatter.format(playerBank);
+		gameEnd = true;
 	}
 
 	public void wonBet() {
@@ -79,6 +89,7 @@ public class Player {
 			playerBank += 2 * playerBet;
 			playerBankString = formatter.format(playerBank);
 			playerBet = 0;
+			gameEnd = true;
 		}
 
 	}
@@ -89,8 +100,7 @@ public class Player {
 
 		if ((pBank -= (0.5) * pBet) >= 0) {
 			System.out.println("Dealer's Visible Card is an Ace. "
-					+ "Would you like to purchase Insurance? "
-					+ "(y/n): ");
+					+ "Would you like to purchase Insurance? " + "(y/n): ");
 			String playerAction = stringInput.nextLine();
 			playerAction.toLowerCase();
 			switch (playerAction) {
@@ -107,11 +117,11 @@ public class Player {
 	}
 
 	public void blackJack() {
-		System.out.println("You got BlackJack! You won:  " + (3 * playerBet)
-				/ 2);
 		playerBank += (3 * playerBet) / 2;
 		playerBankString = formatter.format(playerBank);
+		System.out.println("You got BlackJack! You won:  " + playerBankString);
 		playerBet = 0;
+		gameEnd = true;
 	}
 
 	public Hand getHand() {
@@ -128,6 +138,10 @@ public class Player {
 
 	public double getBet() {
 		return playerBet;
+	}
+
+	public boolean getGameEnd() {
+		return gameEnd;
 	}
 
 	public String getBankString() {

@@ -111,7 +111,8 @@ public class Card {
 	//if a player goes over 21 with an Ace then setAce() sets the value to 1
 	//from 11
 	public void setAce() {
-		System.out.println("Dealer changes " + this.toString() + " to 1");
+		System.out.println(this.toString() + " changes to 1");
+		rank = "Ace (1)";
 		value = 1;
 		
 	}
