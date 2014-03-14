@@ -30,7 +30,11 @@ The shoe is a large deck which contain a minimum number of decks which is multip
 
 ##Hand:
 
-A hand is an ArrayList of Cards which represents the cards the player and dealer have. When the hand is constructed,
+A hand is an ArrayList of Cards which represents the cards the player and dealer have. When the hand is constructed, it takes two cards and adds them to the variable and ArrayList attributes. The hand keeps a count of the handValue which is the integer total of the value of the cards in the hand. The cards Rank is added to Ranks and the Values of the cards are added to Values.
+
+##Player:
+
+The player Class handles
 
 ###Update 3/12/14:
 
