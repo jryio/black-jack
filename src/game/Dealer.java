@@ -20,18 +20,35 @@ public class Dealer {
 
 		this.dealerHand = new Hand(shoe.dealCard(), shoe.dealCard());
 
-		System.out.println("Dealer's  visible card is: "
+		System.out.println("==========================");
+		System.out.println(">Dealer's  visible card is: "
 				+ dealerHand.getHand().get(1).toString());
 
 		player.clearHand();
-		System.out.println("TESTING: Dealer's other card: "
-				+ dealerHand.getHand().get(0).toString());
 
-		System.out.println("Dealing cards to player...");
+		System.out.println(">Dealing cards to player...");
+		System.out.println("==========================");
+
 		player.hit(shoe.dealCard());
 		player.hit(shoe.dealCard());
 
 		System.out.println(player.toString());
+
+		if (player.getBank() - (2 * player.getBet()) > 0) {
+			System.out
+			.println(">Would you like to double down now?(y/n) You have "
+					+ player.getBankString() + " remaining");
+			String answer = stringInput.nextLine();
+			answer.toLowerCase();
+			try {
+				if (answer.equals("y")) {
+					player.doubleDown();
+				}
+			} catch (IllegalStateException e) {
+				e.getMessage();
+				e.printStackTrace();
+			}
+		}
 
 		if (player.getHand().getHandValue() == 21) {
 			dealerStand();
@@ -44,7 +61,8 @@ public class Dealer {
 	}
 
 	public void playerTurn() {
-		while (player.getHand().getHandValue() < 21) {
+
+		do {
 			System.out.println("Hit(1):\tStay(2):");
 			int playerAction = intInput.nextInt();
 			if (playerAction == 1) {
@@ -53,8 +71,9 @@ public class Dealer {
 				System.out.println("You stayed");
 				break;
 			}
-		}
-		// dealerHit();
+		} while (player.getHand().getHandValue() < 21);
+
+		dealerHit();
 	}
 
 	// dealerHit() needs work now because the cards get added without any form
@@ -67,7 +86,7 @@ public class Dealer {
 	// while loop somehow.
 	public void dealerHit() {
 
-		System.out.println("Dealer's hidden cardl: "
+		System.out.println(">Dealer's hidden card was: "
 				+ dealerHand.getHand().get(0).toString());
 
 		while (dealerHand.getHandValue() < 21) {
@@ -75,19 +94,26 @@ public class Dealer {
 					&& !dealerHand.getHValues().contains(11)) {
 
 				dealerHand.addCard(shoe.dealCard());
-				System.out.println("Dealer's Hand: " + dealerHand.toString());
+				System.out.println(">Dealer HIT - Dealer's Hand: "
+						+ dealerHand.toString());
 
 			} else if (dealerHand.getHandValue() >= 17
+					&& dealerHand.getHandValue() > 21
 					&& dealerHand.getHValues().contains(11)) {
 
 				dealerHand.getHand().get(dealerHand.getHValues().indexOf(11))
 				.setAce();
+				dealerHand.setAceValue();
 
 				dealerHand.addCard(shoe.dealCard());
-				System.out.println("Dealer's Hand: " + dealerHand.toString());
+				System.out.println(">Dealer HIT - Dealer's Hand: "
+						+ dealerHand.toString());
 
-			} else if (dealerHand.getHandValue() == 17) {
+			} else if ((dealerHand.getHandValue() >= 17 && !dealerHand
+					.getHValues().contains(11))
+					|| dealerHand.getHandValue() == 21) {
 				dealerStand();
+				break;
 			}
 		}
 
@@ -111,7 +137,9 @@ public class Dealer {
 	}
 
 	public void dealerPush() {
-		System.out.println("Dealer and Player have the same hand");
+		System.out
+		.println("Dealer and Player have the same hand, game is a push");
+		player.playerPush();
 	}
 
 	public void dealerWon() {
@@ -121,7 +149,6 @@ public class Dealer {
 						|| dealerHand.getHandRanks().contains("Queen")
 						|| dealerHand.getHandRanks().contains("King")) {
 
-			System.out.println(dealerHand.toString());
 			System.out.println("Dealer got BlackJack!");
 			dealerHand.clearHand();
 			player.playerLost();
@@ -129,13 +156,14 @@ public class Dealer {
 		}
 
 		else {
-			System.out.println("Dealer won");
 			player.playerLost();
 		}
 	}
 
 	public void dealerStand() {
-		if (dealerHand.getHandValue() < player.getHand().getHandValue()) {
+		if (player.ifBusted() == true) {
+			player.playerBust();
+		} else if (dealerHand.getHandValue() < player.getHand().getHandValue()) {
 			dealerLost();
 		} else if (dealerHand.getHandValue() > player.getHand().getHandValue()) {
 			dealerWon();

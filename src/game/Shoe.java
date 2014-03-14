@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 public class Shoe {
 
+	//Defines ArrayList Shoe, minimum number of dekcs, cards dealt, the deck
+	//count, the total number of cards in the shoe, and the reaminaing cards.
 	private ArrayList<Card> Shoe = new ArrayList<Card>();
 	private final int minDecks = 4;
 	private int dealt = 0;
@@ -13,8 +15,11 @@ public class Shoe {
 	private int numCards;
 	private int cardsRemaining;
 
+	//Import and instantiate Scanner
 	Scanner stringInput = new Scanner(System.in);
 
+	//Constructor takes a number of decks and interates through the dekcs and 
+	//fills the shoe
 	public Shoe(int numDecks) {
 		this.deckCount = numDecks;
 		this.numCards = deckCount * numDecks;
@@ -30,10 +35,13 @@ public class Shoe {
 		Collections.shuffle(Shoe);
 	}
 
+	//Uses Collections to shuffle the ArrayList Shoe.
 	public void shuffle() {
 		Collections.shuffle(Shoe);
 	}
 
+	//Deals a card and keeps track of the cards dealt and reaming cards, if
+	//the cards get low the it reshuffles the deck
 	public Card dealCard() {
 		numCards = deckCount * 52;
 		if (dealt >= numCards) {
@@ -66,11 +74,7 @@ public class Shoe {
 		}
 	}
 
-	public String checkDeck() {
-
-		return null;
-	}
-
+	//Returns the ArrayList Shoe;
 	public ArrayList<Card> getShoe() {
 		return Shoe;
 	}
