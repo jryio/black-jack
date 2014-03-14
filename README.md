@@ -26,7 +26,11 @@ In retrospect, Deck is useless in comparison to Shoe as Shoe has to be an ArrayL
 
 ##Shoe: 
 
-WIP
+The shoe is a large deck which contain a minimum number of decks which is multiplied by 52 to get the total number of cards in the shoe. The show can deal cars and shuffle card if the dealer requires it. The show constructor takes an integer of the number of decks.
+
+##Hand:
+
+A hand is an ArrayList of Cards which represents the cards the player and dealer have. When the hand is constructed,
 
 ###Update 3/12/14:
 
