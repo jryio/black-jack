@@ -3,6 +3,20 @@ BlackJack
 
 AP Computer Science BlackJack Program
 
+
+##Relection:
+
+* 1.) Shockingly 70% of my UML was used in the final project and covered the "core" of the class methods. Some methods and ArrayLists could not have been forseen, such as Values and Ranks in the Hand class. I needed to creat those to handle logical checking in Player and Dealer for BlackJack. I think that the UML was a massive help because it gave me the core stucture of the classes so I didn't have to completely recreate the classess because the methods conflicted. I kept all of the get"____"() methods and most of the set() methods because those things will always be needed regardless of the structure of the code.
+
+
+* 2.) I had a really good time programming this game, it tested me in a way that I didn't think to be tested: to be creative and function while operating in a set boudnry. I found it challenging in a macro sense because in order to make the program work properly, I had to think on multiple Class levels and handle dozens of variables and conditions between methods. I found it very enjoyable and I like the progject that have to do with a fully complete idea, such as a BlackJack game. I felt that I went above and beyond in creating the Hand and Card classes because I think that my approach to handling the values for each card was done very well. I thought that storing the Hand's Values and Ranks in serperate ArrayLists was a good idea and made the checking for certain scenerios much easier. In hindsight, I would have extended Hand to Player because the current method I have makes the inter-Hand calling and checking a major pain because I have to go through the Hand object first
+
+
+Finally, I think that my program earned an A through style and efficieny but not through fucntionality. The game onyl works 60% of the time and the biggest issue is that some of the data breaks the checking methods and doens't resolve a hand to a win or loss. I think that the way I created the classes and prosessed rules was excellent but I coudln't tie it together in the end.
+
+
+
+
 ##Introduction
 
 BlackJack is a simple Java program for an AP Computer Science class.The program is a playable game of BlackJack in which there is a dealer, player, and deck. The basic Heirarchy of the program follows BlackJack Play. 
