@@ -4,7 +4,7 @@ BlackJack
 AP Computer Science BlackJack Program
 
 
-##Relection:
+##Relection - 3/14/14:
 
 * 1.) Shockingly 70% of my UML was used in the final project and covered the "core" of the class methods. Some methods and ArrayLists could not have been forseen, such as Values and Ranks in the Hand class. I needed to creat those to handle logical checking in Player and Dealer for BlackJack. I think that the UML was a massive help because it gave me the core stucture of the classes so I didn't have to completely recreate the classess because the methods conflicted. I kept all of the get"____"() methods and most of the set() methods because those things will always be needed regardless of the structure of the code.
 
@@ -13,8 +13,6 @@ AP Computer Science BlackJack Program
 
 
 Finally, I think that my program earned an A through style and efficieny but not through fucntionality. The game only works 60% of the time and the biggest issue is that some of the data breaks the checking methods and doens't resolve a hand to a win or loss. I think that the way I created the classes and prosessed rules was excellent but I coudln't tie it together in the end.
-
-
 
 
 ##Introduction
@@ -49,6 +47,11 @@ A hand is an ArrayList of Cards which represents the cards the player and dealer
 ##Player:
 
 The player Class handles **WIP**
+
+###Update 3/16/14
+
+The project was turned in on 3/14/14 on version 3f3e093e68a192e5ef8b8cf22ca86480b5c69ed5. The version contained multiple bugs and required a hot fix in class, offline, without being able to push the changes to master. All work after this point will be to edit and refine the game rules and implement GUI.
+
 
 ###Update 3/12/14:
 
