@@ -12,7 +12,7 @@ AP Computer Science BlackJack Program
 * 2.) I had a really good time programming this game, it tested me in a way that I didn't think to be tested: to be creative and function while operating in a set boudnry. I found it challenging in a macro sense because in order to make the program work properly, I had to think on multiple Class levels and handle dozens of variables and conditions between methods. I found it very enjoyable and I like the progject that have to do with a fully complete idea, such as a BlackJack game. I felt that I went above and beyond in creating the Hand and Card classes because I think that my approach to handling the values for each card was done very well. I thought that storing the Hand's Values and Ranks in serperate ArrayLists was a good idea and made the checking for certain scenerios much easier. In hindsight, I would have extended Hand to Player because the current method I have makes the inter-Hand calling and checking a major pain because I have to go through the Hand object first
 
 
-Finally, I think that my program earned an A through style and efficieny but not through fucntionality. The game onyl works 60% of the time and the biggest issue is that some of the data breaks the checking methods and doens't resolve a hand to a win or loss. I think that the way I created the classes and prosessed rules was excellent but I coudln't tie it together in the end.
+Finally, I think that my program earned an A through style and efficieny but not through fucntionality. The game only works 60% of the time and the biggest issue is that some of the data breaks the checking methods and doens't resolve a hand to a win or loss. I think that the way I created the classes and prosessed rules was excellent but I coudln't tie it together in the end.
 
 
 
@@ -48,7 +48,7 @@ A hand is an ArrayList of Cards which represents the cards the player and dealer
 
 ##Player:
 
-The player Class handles
+The player Class handles **WIP**
 
 ###Update 3/12/14:
 
