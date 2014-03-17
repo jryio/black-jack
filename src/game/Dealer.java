@@ -82,14 +82,7 @@ public class Dealer {
 		dealerHit();
 	}
 
-	// dealerHit() needs work now because the cards get added without any form
-	// of notification.
 
-	// Also follow the logic down to dealerStand() as the
-	// "won bet" - "lost bet" ends are stuck in an infinite loop. They need
-	// to break out of the infinite loop that playerTurn() and dealerHit() use.
-	// Basically once someone has won a hand they need to break out of the
-	// while loop somehow.
 	public void dealerHit() {
 
 		System.out.println(">Dealer's hidden card was: "
