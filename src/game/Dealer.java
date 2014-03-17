@@ -7,6 +7,7 @@ public class Dealer {
 	private Hand dealerHand;
 	private Shoe shoe;
 	private Player player;
+	private boolean handEnd = false;
 	Scanner stringInput = new Scanner(System.in);
 	Scanner intInput = new Scanner(System.in);
 
@@ -20,14 +21,19 @@ public class Dealer {
 
 		this.dealerHand = new Hand(shoe.dealCard(), shoe.dealCard());
 
-		System.out.println("==========================");
+		System.out
+		.println("====================================================");
 		System.out.println(">Dealer's  visible card is: "
 				+ dealerHand.getHand().get(1).toString());
+		
+		System.out.println("TESTING: DEALER'S SECOND CARD - "
+				+ dealerHand.getHand().get(0).toString());
 
 		player.clearHand();
 
 		System.out.println(">Dealing cards to player...");
-		System.out.println("==========================");
+		System.out
+		.println("====================================================");
 
 		player.hit(shoe.dealCard());
 		player.hit(shoe.dealCard());
@@ -36,7 +42,7 @@ public class Dealer {
 
 		if (player.getBank() - (2 * player.getBet()) > 0) {
 			System.out
-			.println(">Would you like to double down now?(y/n) You have "
+			.println("\n>Would you like to double down now?(y/n) You have "
 					+ player.getBankString() + " remaining");
 			String answer = stringInput.nextLine();
 			answer.toLowerCase();
@@ -90,6 +96,7 @@ public class Dealer {
 				+ dealerHand.getHand().get(0).toString());
 
 		while (dealerHand.getHandValue() < 21) {
+
 			if (dealerHand.getHandValue() < 17
 					&& !dealerHand.getHValues().contains(11)) {
 
@@ -110,9 +117,8 @@ public class Dealer {
 						+ dealerHand.toString());
 
 			} else if ((dealerHand.getHandValue() >= 17 && !dealerHand
-					.getHValues().contains(11))
-					|| dealerHand.getHandValue() == 21) {
-				dealerStand();
+					.getHValues().contains(11))) {
+				System.out.println(">Dealer stops dealing cards");
 				break;
 			}
 		}
@@ -129,17 +135,20 @@ public class Dealer {
 		System.out.println("Dealer Busted");
 		dealerHand.clearHand();
 		player.wonBet();
+		handEnd = true;
 	}
 
 	public void dealerLost() {
 		player.wonBet();
 		dealerHand.clearHand();
+		handEnd = true;
 	}
 
 	public void dealerPush() {
 		System.out
-		.println("Dealer and Player have the same hand, game is a push");
+		.println(">Dealer and Player have the same hand, game is a push");
 		player.playerPush();
+		handEnd = true;
 	}
 
 	public void dealerWon() {
@@ -152,11 +161,13 @@ public class Dealer {
 			System.out.println("Dealer got BlackJack!");
 			dealerHand.clearHand();
 			player.playerLost();
+			handEnd = true;
 
 		}
 
 		else {
 			player.playerLost();
+			handEnd = true;
 		}
 	}
 
@@ -174,6 +185,14 @@ public class Dealer {
 
 	public Player getPlayer() {
 		return player;
+	}
+	
+	public boolean getHandEnd(){
+		return handEnd;
+	}
+	
+	public void handEndReset(){
+		handEnd = false;
 	}
 
 	public String toString() {

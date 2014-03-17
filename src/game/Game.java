@@ -14,7 +14,7 @@ public class Game {
 	private static double playerBank;
 	private int numDecks;
 
-	Scanner intInput = new Scanner(System.in);
+	static Scanner intInput = new Scanner(System.in);
 	static Scanner stringInput = new Scanner(System.in);
 	static Random generate = new Random();
 
@@ -29,58 +29,63 @@ public class Game {
 			.println(">GENERATING RANDOM BANK TO PLAY WITH $(50 - 2000)...");
 			TimeUnit.MILLISECONDS.sleep(500);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		playerBank = (double) generate.nextInt(1950) + 50;
-		System.out.println(">PLAYER BANK = " + playerBank);
+		System.out.println(">PLAYER BANK = $" + playerBank);
 
 		try {
 			System.out.println(">CREATING PLAYER...");
 			TimeUnit.MILLISECONDS.sleep(500);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		hand = new Hand(shoe.dealCard(), shoe.dealCard());
 		player = new Player(hand, playerName, playerBank);
-		
+
 		System.out.println(">PLAYER CREATED.");
-		
+
 		dealer = new Dealer(player, shoe);
+
+		System.out.println("How much would you like to bet? (up to "
+				+ player.getBankString() + ")");
+		double bet = (double) intInput.nextInt();
+		player.playerBet(bet);
 
 		System.out.println(">ARE YOU READY TO START " + playerName + "? (y/n)");
 		String answer = stringInput.nextLine();
 		answer.toLowerCase();
-		try{
-			if(answer.equals("y")){
-				dealer.firstDeal();
+		try {
+			if (answer.equals("y")) {
+				play();
 			}
-		}catch(IllegalStateException e){
+		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void play(){
-		do
-		{
+	public static void play() {
+		while (dealer.getHandEnd() == false) {
 			dealer.firstDeal();
-		} while(player.getGameEnd() == false);
+		}
 		playAgain();
-		
+
 	}
-	
-	
-	public void playAgain() {
-		System.out.println("Do you wan to play again?(y/n)");
+
+	public static void playAgain() {
+		System.out.println("\n>Do you wan to play again?(y/n)");
 		String answer = stringInput.nextLine();
 		answer.toLowerCase();
-		try{
-			if(answer.equals("y")){
+		try {
+			if (answer.equals("y")) {
+				dealer.handEndReset();
 				play();
+			} else {
+				System.out.println("Thanks for playing. Your total: "
+						+ player.getBank());
 			}
-		}catch(IllegalStateException e){
+		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		}
 	}

@@ -14,7 +14,6 @@ public class Player {
 	private String playerName;
 	private double playerBet;
 	private Hand hand;
-	private boolean gameEnd = false;
 	private boolean playerBusted = false;
 
 	// Imports and Instantiates NumberFormatter
@@ -79,13 +78,13 @@ public class Player {
 		System.out.println("You busted.");
 		playerBet = 0;
 		playerBusted = true;
-		gameEnd = true;
+		
 
 	}
-	
-	public boolean ifBusted(){
+
+	public boolean ifBusted() {
 		return playerBusted;
-		
+
 	}
 
 	// If the player's hand was less than the dealer's then they lost and their
@@ -94,7 +93,8 @@ public class Player {
 		System.out.println("You lost");
 		this.hand.clearHand();
 		playerBet = 0;
-		gameEnd = true;
+		
+
 	}
 
 	// If the player and the dealer get the same amount they push, 1:1 payout
@@ -102,7 +102,8 @@ public class Player {
 		playerBank += playerBet;
 		playerBet = 0;
 		playerBankString = formatter.format(playerBank);
-		gameEnd = true;
+		
+
 	}
 
 	// wonBet() determines what type of win the player has received and calls
@@ -119,8 +120,6 @@ public class Player {
 			playerBank += 2 * playerBet;
 			playerBankString = formatter.format(playerBank);
 			playerBet = 0;
-			gameEnd = true;
-			this.hand.clearHand();
 		}
 
 	}
@@ -171,7 +170,8 @@ public class Player {
 		playerBankString = formatter.format(playerBank);
 		System.out.println("You got BlackJack! You won:  " + playerBankString);
 		playerBet = 0;
-		gameEnd = true;
+		
+
 	}
 
 	// Returns the Hand object
@@ -192,11 +192,6 @@ public class Player {
 	// returns the playerBet
 	public double getBet() {
 		return playerBet;
-	}
-
-	// Returns the Boolean when the game is over to check if it passes
-	public boolean getGameEnd() {
-		return gameEnd;
 	}
 
 	// Returns String playerBankString which has been formatter with
